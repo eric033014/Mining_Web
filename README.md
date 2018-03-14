@@ -1,7 +1,9 @@
 # Mining_Web
 
-此為一個預測分析 NBA Data 的平常，主要有三個功能
+參與人員：徐子崴、徐躍華、王瀚
 
+此為一個預測分析 NBA Data 的平常，主要有三個功能
+功能：
 1.名人堂預測：該選中球員如果當下退役，進入名人堂的機率為何？
   Data來源：https://www.basketball-reference.com/players
   前處理：由於三分球的起始年代約於1980年代左右，因此，在這之前的Data缺漏太多，即使做了資料補齊，誤差依然會很大。
@@ -13,4 +15,14 @@
        最後再將現役球員的data丟進去最測試，看符不符合目前的各大運動網站上的預測，發現雖然順序有些不同，但是大致上會進球員都十分相似。
 
 2.年度防守第一隊、年度第一隊：
+  Data來源：https://www.basketball-reference.com/players
+  前處理：由於得到的Data都是屬於原始資訊，我們將資料經過ＮＢＡ官網參考的公式計算後，算出進階的數據。
+  算法：利用所得到的進階Data做Training，利用Random Forest 以及Linear Regression 做出Model之後，再去預測該選中球員的入選的機率。
+  
+Server概述：
+1.Django Server:
+  主要處理 Machine Learning 演算法，訓練出 Model 之後，利用 Express Server送過來的request data，去預測該球員的三種機率(名人堂、年度第一隊、防   守第一隊)，再將機率送回 Express Server。
+2.Express Server:
+  主要負責前端介面與送出使用者選中的球員數據，讓Django Server去做計算，然後再將 Return 回來的機率顯示在頁面上。
   
+Demo 影片：https://youtu.be/4EQf-GIAVLY
